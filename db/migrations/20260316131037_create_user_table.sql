@@ -1,0 +1,13 @@
+-- migrate:up
+CREATE TABLE IF NOT EXISTS  users (
+  id BIGINT NOT NULL auto_increment PRIMARY KEY,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+-- migrate:down
+drop table if EXISTS users;
+
