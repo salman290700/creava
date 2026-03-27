@@ -26,8 +26,7 @@ func (h *Handler) RefreshToken(c *gin.Context) {
 		})
 		return
 	}
-	userID, _ := c.Get("userID")
-	user_id := int64(userID.(float64))
+	user_id := c.GetInt64("userID") 
 	token, refresh_token, setStatusCode, err := h.userService.RefreshToken(ctx, &req, user_id)
 	if err != nil {
 		c.JSON(setStatusCode, gin.H{
