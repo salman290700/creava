@@ -1,19 +1,17 @@
-package user
+package post
 
 import (
-	"fmt"
 	"gotweet/internal/dto"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func (h *Handler) Register(c *gin.Context) {
+func (h *Handler) CreatePosthandler(c *gin.Context) {
 	var (
 		ctx = c.Request.Context()
-		req dto.RegisterRequest
+		req dto.CreatePostRequest
 	)
-	fmt.Println(&req)
 
 	if err := c.Copy().ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -21,21 +19,23 @@ func (h *Handler) Register(c *gin.Context) {
 		})
 		return
 	}
+
 	if err := h.validate.Struct(req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 		return
 	}
-	userID, setStatusCode, err := h.userService.Register(ctx, &req)
+
+	userID := c.GetInt64("userID")
+	id_post, setStatusCode, err := h.postService.CreatePost(ctx, &req, userID)
 	if err != nil {
 		c.JSON(setStatusCode, gin.H{
-			"message": err.Error(),
+			"message": err,
 		})
 		return
 	}
-	
-	c.JSON(setStatusCode, dto.RegisterResponse{
-		ID: userID,
+	c.JSON(setStatusCode, &dto.CreatePostResponse{
+		ID: id_post,
 	})
 }

@@ -36,13 +36,13 @@ type (
 	}
 
 	UserResGoogle struct {
-		Email          string `validate:"email"`
-		Email_verified bool   `validate:"email_verified"`
-		Family_name    string `validate:"family_name"`
-		Given_name     string `validate:"given_name"`
-		Name           string `validate:"name"`
-		Picture        string `validate:"picture"`
-		Token          string `validate:"token"`
-		Role           string `validate:"role"`
+		Email          string `json:"email"`
+		Email_verified bool   `json:"email_verified"`
+		Family_name    string `json:"family_name"`
+		Given_name     string `json:"given_name"`
+		Name           string `json:"name"`
+		Picture        string `json:"picture"`
+		Token          string `json:"token"`
+		Role           string `json:"role"`
 	}
 )

@@ -5,8 +5,6 @@ import (
 	"gotweet/internal/config"
 	"gotweet/internal/dto"
 	"gotweet/internal/repository/user"
-
-	"github.com/gin-gonic/gin"
 )
 
 type UserService interface {
@@ -19,7 +17,6 @@ type UserService interface {
 type userService struct {
 	cfg      *config.Config
 	userRepo user.UserRepository
-	c        *gin.Context
 }
 
 func NewService(cfg *config.Config, userREpo user.UserRepository) UserService {

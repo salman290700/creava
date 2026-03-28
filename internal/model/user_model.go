@@ -12,10 +12,6 @@ type (
 		UpdatedAt time.Time
 	}
 
-	PostModel struct {
-		ID int64
-	}
-
 	RefreshTokenModel struct {
 		ID           int64
 		UserID       int64
