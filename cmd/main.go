@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"gotweet/internal/config"
 	"gotweet/internal/handler/post"
+	socketRoom "gotweet/internal/handler/room"
 	"gotweet/internal/handler/user"
 	postRepository "gotweet/internal/repository/post"
 	userRepository "gotweet/internal/repository/user"
 	postService "gotweet/internal/service/post"
 	userService "gotweet/internal/service/user"
 	"gotweet/pkg/internalsql"
+	socket "gotweet/websocket"
 	"net/http"
 
 	"log"
@@ -47,6 +49,12 @@ func main() {
 	postHandler := post.NewPostHandler(r, validate, postService)
 	userhandler.RouteList(cfg.SecretJwt)
 	postHandler.RoutePostList(cfg.SecretJwt)
+
+	// Websocket
+
+	hub := socket.NewHub()
+	socketHandler := socketRoom.NewHandler(r, hub)
+	socketHandler.RouteList(cfg.SecretJwt)
 	r.GET("/", func(ctx *gin.Context) {
 		fmt.Printf("ClientIP: %s\n", ctx.ClientIP())
 	})
