@@ -1,6 +1,10 @@
 package socket
 
-import "github.com/gorilla/websocket"
+import (
+	"log"
+
+	"github.com/gorilla/websocket"
+)
 
 // Client represen websocket client
 type Client struct {
@@ -13,6 +17,45 @@ type Client struct {
 
 type Message struct {
 	Content  string `json:"content"`
-	RoomID   string `json:"roomId"`
+	RoomID   string `json:"room_id"`
 	Username string `json:"username"`
+}
+
+func (c *Client) WriteMessage() {
+	defer func() {
+		c.Conn.Close()
+	}()
+
+	for {
+		message, ok := <-c.Message
+		if !ok {
+			return
+		}
+
+		c.Conn.WriteJSON(message)
+	}
+}
+
+func (c *Client) ReadMessage(hub *Hub) {
+	defer func() {
+		hub.Unregister <- c
+		c.Conn.Close()
+	}()
+
+	for {
+		_, m, err := c.Conn.ReadMessage()
+		if err != nil {
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+				log.Printf("error: %v", err)
+			}
+			break
+		}
+
+		msg := &Message{
+			Content:  string(m),
+			RoomID:   c.RoomId,
+			Username: c.Username,
+		}
+		hub.Broadcast <- msg
+	}
 }

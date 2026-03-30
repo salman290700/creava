@@ -17,8 +17,9 @@ func (h *Handler) CreateRoom(c *gin.Context) {
 	}
 
 	h.hub.Rooms[req.ID] = &socket.Room{
-		ID:      req.ID,
-		Name:    req.Name,
+		ID:   req.ID,
+		Name: req.Name,
+
 		Clients: make(map[string]*socket.Client),
 	}
 	c.JSON(http.StatusOK, req)

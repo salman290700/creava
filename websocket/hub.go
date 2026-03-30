@@ -13,6 +13,11 @@ type Hub struct {
 	Broadcast  chan *Message
 }
 
+type ClientRes struct {
+	ID       string `json:"id"`
+	Username string `json:"username"`
+}
+
 func NewHub() *Hub {
 	return &Hub{
 		Rooms:      make(map[string]*Room),
