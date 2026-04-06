@@ -43,14 +43,15 @@ func (s *userService) Login(ctx context.Context, loginDto *dto.LoginRequst) (str
 	if err != nil {
 		return "", "", http.StatusInternalServerError, err
 	}
-	if refresh_token_obj != nil {
-		return token, refresh_token_obj.RefreshToken, http.StatusOK, nil
+	if refresh_token_obj == nil {
+		refresh_token, err := refreshtoken.GenerateRefreshToken()
+		if err != nil {
+			return "", "", http.StatusInternalServerError, err
+		}
+		return token, refresh_token, http.StatusOK, nil
 	}
 	// generate & store refresh token
-	refresh_token, err := refreshtoken.GenerateRefreshToken()
-	if err != nil {
-		return "", "", http.StatusBadRequest, err
-	}
+	refresh_token := refresh_token_obj.RefreshToken
 
 	err = s.userRepo.StoreRefreshToken(ctx, &model.RefreshTokenModel{
 		UserID:       user.ID,
@@ -62,5 +63,6 @@ func (s *userService) Login(ctx context.Context, loginDto *dto.LoginRequst) (str
 	if err != nil {
 		return "", "", http.StatusInternalServerError, err
 	}
+
 	return token, refresh_token, http.StatusAccepted, nil
 }

@@ -36,9 +36,8 @@ func (h *Handler) Login(c *gin.Context) {
 		})
 		return
 	}
-	data := &dto.LoginResponse{
+	c.JSON(setStatusCode, &dto.LoginResponse{
 		Token:        token,
 		RefreshToken: refresh_token,
-	}
-	c.JSON(setStatusCode, data)
+	})
 }
