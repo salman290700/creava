@@ -92,4 +92,8 @@ type (
 		Status    string
 		CreatedAt time.Time
 	}
+
+	ID struct {
+		ID int64
+	}
 )

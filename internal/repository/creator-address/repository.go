@@ -6,7 +6,8 @@ import (
 )
 
 type CreatorAddressRepository interface {
-	CreateCreatorAddress(ctx context.Context, creator_id int64, address, province, regency, district, sub_district, village string) (int64, error)
+	CreateCreatorAddress(ctx context.Context, creator_id int64, address_id int64) (int64, error)
+	GetCreatorAddressbyCreatorIdAndAddressId(ctx context.Context, creator_id, address_id int64) (int64, error)
 }
 
 type creatorAddressRepository struct {
