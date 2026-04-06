@@ -3,10 +3,10 @@ CREATE TABLE creator_data (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     creator BIGINT NOT NULL,
     email BIGINT NOT NULL,
-    phone_number BIGINT NOT NULL,
-    address BIGINT NOT NULL,
+    phone_number BIGINT,
+    address BIGINT,
     version BIGINT NOT NULL DEFAULT 1,
-    status BIGINT NOT NULL,
+    status BIGINT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 

@@ -2,10 +2,18 @@ package creator
 
 import (
 	"context"
-	"gotweet/internal/model"
 )
 
-func (r *creatorRepository) CreateCreator(ctx context.Context, data *model.Creator) (int64, error) {
-	
-	return 0, nil
+func (r *creatorRepository) CreateCreator(ctx context.Context, name, hashed_password string) (int64, error) {
+	// Create Creator
+	query := `INSERT INTO creators (name, password) VALUES (?, ?)`
+	res, err := r.db.ExecContext(ctx, query, name, hashed_password)
+	if err != nil {
+		return 0, err
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
 }
