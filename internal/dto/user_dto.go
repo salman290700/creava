@@ -32,7 +32,7 @@ type (
 	}
 
 	LoginWithGoogleReq struct {
-		Token string `json:"token", validate:"required"`
+		Token string `json:"token" validate:"required"`
 	}
 
 	UserResGoogle struct {
@@ -46,5 +46,3 @@ type (
 		Role           string `json:"role"`
 	}
 )
-
-
