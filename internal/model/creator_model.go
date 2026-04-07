@@ -96,4 +96,14 @@ type (
 	ID struct {
 		ID int64
 	}
+
+	// Data only for program
+	RefreshTokenCreatorModel struct {
+		ID           int64
+		CreatorID    int64
+		RefreshToken string
+		CreatedAt    time.Time
+		UpdatedAt    time.Time
+		ExpiredAt    time.Time
+	}
 )

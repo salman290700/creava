@@ -34,6 +34,8 @@ func (s *userService) LoginWithGoogle(ctx context.Context, req *dto.UserResGoogl
 		userId = user.ID
 	}
 
+	
+
 	// Generate Access Token
 	token, err := jwt.CreateToken(userId, user.Username, s.cfg.SecretJwt)
 	if err != nil {
