@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-func (r *creatorContactRepository) CreateCreatorContact(ctx context.Context, creator_id int64, phone_number string) (int64, error) {
+func (r *creatorContactRepository) CreateCreatorContact(ctx context.Context, creator_id int64, phone_number int64) (int64, error) {
 	query := `INSERT INTO creator_contact (creator_id, phone_number) VALUES (?, ?)`
 	res, err := r.db.ExecContext(ctx, query, creator_id, phone_number)
 	if err != nil {
