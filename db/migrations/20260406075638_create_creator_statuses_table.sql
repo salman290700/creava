@@ -20,4 +20,4 @@ CREATE TABLE creator_statuses (
 );
 
 -- migrate:down
-DROP TABLE IF EXISTS creatos_statuses
+DROP TABLE IF EXISTS creator_statuses

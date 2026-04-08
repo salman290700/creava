@@ -46,11 +46,11 @@ type (
 	}
 
 	CreatorContact struct {
-		ID          int64
-		PhoneNumber string
-		CreatorId   int64
-		CreatedAt   time.Time
-		UpdatedAt   time.Time
+		ID        int64
+		ContactID int64
+		CreatorId int64
+		CreatedAt time.Time
+		UpdatedAt time.Time
 	}
 
 	CreatorEmail struct {
@@ -78,7 +78,11 @@ type (
 		Address         string
 		PostalCode      int64
 	}
-
+	Contact struct {
+		ID          int64
+		PhoneNumber string
+		CreatedAt   time.Time
+	}
 	Email struct {
 		ID        int64
 		Email     string

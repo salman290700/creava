@@ -7,4 +7,4 @@ CREATE TABLE statuses (
 );
 
 -- migrate:down
-DROP TABLE IF NOT EXISTS statuses
+DROP TABLE IF EXISTS statuses

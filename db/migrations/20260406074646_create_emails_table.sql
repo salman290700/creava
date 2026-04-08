@@ -8,4 +8,4 @@ CREATE TABLE emails (
 );
 
 -- migrate:down
-DROP TABLE IF NOT EXISTS emails
+DROP TABLE IF EXISTS emails

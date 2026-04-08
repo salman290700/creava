@@ -22,4 +22,4 @@ CREATE TABLE creator_emails (
 );
 
 -- migrate:down
-DROP TABLE IF NOT EXISTS creator_emails
+DROP TABLE IF EXISTS creator_emails

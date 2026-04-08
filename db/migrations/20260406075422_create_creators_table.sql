@@ -8,4 +8,4 @@ CREATE TABLE creators (
 );
 
 -- migrate:down
-DORP TABLE IF EXISTS creators
+DROP TABLE IF EXISTS creators
