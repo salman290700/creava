@@ -1,9 +1,9 @@
-package creator
+package creatorprofile
 
 import (
 	"context"
 	"gotweet/internal/config"
-	"gotweet/internal/dto"
+	"gotweet/internal/model"
 	"gotweet/internal/repository/address"
 	"gotweet/internal/repository/creator"
 	creatorRepository "gotweet/internal/repository/creator"
@@ -17,11 +17,11 @@ import (
 	"gotweet/internal/repository/status"
 )
 
-type CreatorService interface {
-	LoginWithGoogle(ctx context.Context, token *dto.UserResGoogle) (string, string, int64, error)
+type CreatorProfileService interface {
+	GetCreatorProfile(ctx context.Context, cretor_id int64) (*model.CreatorProfiling, error)
 }
 
-type creatorService struct {
+type creatorProfileService struct {
 	statusRepo         status.StatusRepository
 	addressRepo        address.AddressRepository
 	emailRepo          email.EmailRepository
@@ -35,7 +35,7 @@ type creatorService struct {
 	cfg                *config.Config
 }
 
-func NewCreatorService(
+func NewCreatorProfileService(
 	statusRepo status.StatusRepository,
 	addressRepo address.AddressRepository,
 	emailRepo email.EmailRepository,
@@ -47,8 +47,8 @@ func NewCreatorService(
 	creatorbalancerepo creatorbalance.CreatorBalanceRepository,
 	creatorImageRepo creatorimage.CreatorImageRepository,
 	cfg *config.Config,
-) CreatorService {
-	return &creatorService{
+) CreatorProfileService {
+	return &creatorProfileService{
 		statusRepo:         statusRepo,
 		addressRepo:        addressRepo,
 		emailRepo:          emailRepo,

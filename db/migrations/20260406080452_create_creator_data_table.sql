@@ -4,9 +4,10 @@ CREATE TABLE creator_data (
     creator BIGINT NOT NULL,
     email BIGINT NOT NULL,
     phone_number BIGINT,
+    image_url BIGINT,
     address BIGINT,
     version BIGINT NOT NULL DEFAULT 1,
-    status BIGINT,
+    status BIGINT,    
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -40,6 +41,10 @@ CREATE TABLE creator_data (
         FOREIGN KEY (status) REFERENCES creator_statuses(id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
+    CONSTRAINT fk_creator_data_image_url
+    FOREIGN KEY (image_url) REFERENCES creator_image(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
 
     UNIQUE KEY unique_creator_data (creator)
 );

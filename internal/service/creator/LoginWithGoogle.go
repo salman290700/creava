@@ -15,6 +15,7 @@ func (s *creatorService) LoginWithGoogle(ctx context.Context, data *dto.UserResG
 		creator_id int64
 		email      string
 	)
+	now := time.Now()
 	// Get CreatorData First
 	res, err := s.creatorDataRepo.GetCreatorData(ctx, data.Email)
 	if err != nil {
@@ -33,6 +34,16 @@ func (s *creatorService) LoginWithGoogle(ctx context.Context, data *dto.UserResG
 			return "", "", http.StatusBadRequest, err
 		}
 		email = data.Email
+		now := time.Now()
+		_, err = s.creatorbalancerepo.CreateCreatorBalance(ctx, creator_id, 0.00, 0.00, 0.00, "usd", 1, now)
+		if err != nil {
+			return "", "", http.StatusBadRequest, err
+		}
+
+		_, err = s.creatorImageRepo.CreateCreatorImage(ctx, creator_id, data.Picture, now)
+		if err != nil {
+			return "", "", http.StatusBadRequest, err
+		}
 	}
 
 	// Get creator_id, email
@@ -49,7 +60,6 @@ func (s *creatorService) LoginWithGoogle(ctx context.Context, data *dto.UserResG
 	if err != nil {
 		return "", "", http.StatusBadRequest, err
 	}
-	now := time.Now()
 	err = s.creatorDataRepo.StoreRefreshToken(ctx, &model.RefreshTokenCreatorModel{
 		CreatorID:    creator_id,
 		RefreshToken: refresh_token,

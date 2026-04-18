@@ -7,7 +7,7 @@ import (
 )
 
 func (r *creatorDataRepository) GetCreatorData(ctx context.Context, email string) (*model.CreatorData, error) {
-	email_query := `select id, email ,verified, created_at, updated_at from emails where email = ?`
+	email_query := `select id, email ,verified, created_at, updated_at from emails where email = ? LIMIT 1`
 	res := r.db.QueryRowContext(ctx, email_query, email)
 	var data_email model.Email
 	res.Scan(&data_email.ID, &data_email.Email, &data_email.Verified, &data_email.CreatedAt, &data_email.UpdatedAt)

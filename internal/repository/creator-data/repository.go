@@ -14,6 +14,7 @@ type CreatorDataRepository interface {
 	GetCreatorData(ctx context.Context, email string) (*model.CreatorData, error)
 	StoreRefreshToken(ctx context.Context, refresh_token *model.RefreshTokenCreatorModel, userID int64) error
 	GetRefreshtoken(ctx context.Context, id int64, now time.Time) (*model.RefreshTokenCreatorModel, error)
+	GetCreatorDataByCreatorID(ctx context.Context, creator_id int64) (*model.CreatorData, error)
 }
 
 type creatorDataRepository struct {

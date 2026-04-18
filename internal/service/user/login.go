@@ -19,7 +19,7 @@ func (s *userService) Login(ctx context.Context, loginDto *dto.LoginRequst) (str
 	if err != nil {
 		return "", "", http.StatusBadRequest, err
 	}
-
+	
 	if user == nil {
 		return "", "", http.StatusBadRequest, errors.New("Wrong email or Password")
 	}

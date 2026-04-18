@@ -110,4 +110,57 @@ type (
 		UpdatedAt    time.Time
 		ExpiredAt    time.Time
 	}
+
+	CreatorBalance struct {
+		ID               int64
+		CreatorID        int64
+		Balance          float64
+		PendingBalance   float64
+		WithdrawnBalance float64
+		Currency         string
+		Version          int64
+		CreatedAt        time.Time
+		UpdatedAt        time.Time
+	}
+
+	CreatorTransaction struct {
+		ID               int64
+		Creator_id       int64
+		Balance_id       int64
+		Transaction_type string
+		Amount           float64
+		Currency         string
+		Reference_id     int64
+		Description      string
+		Status           string
+		Version          int64
+		Created_at       time.Time
+		Updated_at       time.Time
+	}
+
+	CreatorDonation struct {
+		ID                int64
+		SenderCreatorID   int64
+		ReceiverCreatorID int64
+		TransactionID     int64
+		Amount            float64
+		Currency          string
+		DonorName         string
+		DonorEmail        string
+		DonorMessage      string
+		Message           string
+		PaymentMethod     string
+		ExternalReference int64
+		Status            string
+		Version           int64
+		CreatedAt         time.Time
+		UpdatedAt         time.Time
+	}
+
+	CreatorImage struct {
+		ID        int64
+		CreatorID int64
+		ImageUrl  string
+		CreatedAt time.Time
+	}
 )
