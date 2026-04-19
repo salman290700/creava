@@ -8,7 +8,7 @@ import (
 
 type CreatorStatusRepository interface {
 	// CreateCreatorStatus(ctx context.Context, creator_id int64)
-	GetCreatorStatus(ctx context.Context, creator_id int64) (*model.CreatorStatus, error)
+	GetCreatorStatus(ctx context.Context, creator_status_id int64) (*model.CreatorStatus, error)
 }
 
 type creatorStatusRepository struct {

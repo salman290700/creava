@@ -1,10 +1,14 @@
 package status
 
-import "context"
+import (
+	"context"
+	"time"
+)
 
 func (r *statusRepository) CreateStatus(ctx context.Context, status string) (int64, error) {
-	query := `INSERT INTO statuses (status) VALUES (?)`
-	res, err := r.db.ExecContext(ctx, query, status)
+	now := time.Now()
+	query := `INSERT INTO statuses (status, created_at, updated_at) VALUES (?, ?, ?)`
+	res, err := r.db.ExecContext(ctx, query, status, now, now)
 	if err != nil {
 		return 0, err
 	}

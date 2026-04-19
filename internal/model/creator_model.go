@@ -7,9 +7,11 @@ type (
 	CreatorProfiling struct {
 		CreatorID      int64
 		Name           string
+		Username       string
 		Email          string
 		HashedPassword string
 		PhoneNumber    string
+		Image_url      string
 		Province       string
 		Regency        string
 		District       string
@@ -17,13 +19,18 @@ type (
 		Villages       string
 		Address        string
 		PostallCode    int64
+		Status         string
+		CreatedAt      time.Time
+		UpdatedAt      time.Time
 	}
 
 	CreatorData struct {
 		ID          int64
 		Creator     int64
+		Username    string
 		Email       int64
 		PhoneNumber int64
+		ImageUrl    int64
 		Address     int64
 		Version     int64
 		Status      int64
@@ -34,6 +41,7 @@ type (
 	Creator struct {
 		ID        int64
 		Name      string
+		Username  string
 		Password  string
 		Version   int64
 		CreatedAt time.Time
@@ -95,6 +103,7 @@ type (
 		ID        int64
 		Status    string
 		CreatedAt time.Time
+		UpdatedAt time.Time
 	}
 
 	ID struct {
@@ -160,7 +169,13 @@ type (
 	CreatorImage struct {
 		ID        int64
 		CreatorID int64
-		ImageUrl  string
+		ImageUrl  int64
+		CreatedAt time.Time
+	}
+
+	Image struct {
+		ID        int64
+		Image     string
 		CreatedAt time.Time
 	}
 )

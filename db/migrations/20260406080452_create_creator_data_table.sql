@@ -7,7 +7,7 @@ CREATE TABLE creator_data (
     image_url BIGINT,
     address BIGINT,
     version BIGINT NOT NULL DEFAULT 1,
-    status BIGINT,    
+    status BIGINT, 
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 

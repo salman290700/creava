@@ -24,11 +24,13 @@ func (s *creatorService) LoginWithGoogle(ctx context.Context, data *dto.UserResG
 	// If Null Create Creator and insert email
 	name := data.Given_name + data.Family_name
 	if res == nil {
+		// Create Creator
 		creator_id_res, err := s.creatorRepo.CreateCreator(ctx, name, "")
 		if err != nil {
 			return "", "", http.StatusBadRequest, err
 		}
 		creator_id = creator_id_res
+		// Create Email
 		_, err = s.emailRepo.CreateEmail(ctx, data.Email, data.Email_verified)
 		if err != nil {
 			return "", "", http.StatusBadRequest, err
@@ -39,16 +41,16 @@ func (s *creatorService) LoginWithGoogle(ctx context.Context, data *dto.UserResG
 		if err != nil {
 			return "", "", http.StatusBadRequest, err
 		}
-
+		// Create Creator Image
 		_, err = s.creatorImageRepo.CreateCreatorImage(ctx, creator_id, data.Picture, now)
 		if err != nil {
 			return "", "", http.StatusBadRequest, err
 		}
-	}
-
-	// Get creator_id, email
-	if res != nil {
+	} else {
+		// Get creator_id, email
+		// if res != nil {
 		creator_id = res.ID
+		// }
 	}
 	// Create jwt token
 	token, err := jwt.CreateToken(creator_id, email, s.cfg.SecretJwt)

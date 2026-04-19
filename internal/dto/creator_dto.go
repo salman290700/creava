@@ -29,4 +29,13 @@ type (
 	CreatorDonationRespose struct {
 		ID int64 `json:"id"`
 	}
+
+	UploadCreatorProfileDTO struct {
+		CreatorID       int64  `json:"id"`
+		Username        string `json:"username"`
+		Password        string `json:"password"`
+		ConfirmPassword string `json:"password_confirm"`
+		Description     string `json:"description"`
+		ImageUrl        string `json:"image_url"`
+	}
 )
